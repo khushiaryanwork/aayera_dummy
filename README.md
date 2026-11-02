@@ -2,6 +2,8 @@
 
 Marketing site for [Aayera](https://www.aayera.com), built with [Astro](https://astro.build) and React. Content is managed in [Sanity](https://www.sanity.io), with the editing Studio built into the site at `/studio`.
 
+**Preview:** [website](https://khushiaryanwork.github.io/aayera_dummy/) · [Sanity Studio](https://khushiaryanwork.github.io/aayera_dummy/studio/) (GitHub Pages, redeploys on every push to `main`)
+
 ## Getting started
 
 Requires Node.js 22 or newer.
