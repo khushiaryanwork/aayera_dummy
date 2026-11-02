@@ -1,0 +1,59 @@
+/* Aayera design tokens. To change the accent everywhere, edit --color-accent and --color-accent-strong. */
+:root {
+  --color-black: oklch(13% 0.012 260);
+  --color-black-raised: oklch(19% 0.016 260);
+  --color-black-rule: oklch(30% 0.018 260);
+  --color-on-black: oklch(96% 0.004 260);
+  --color-on-black-muted: oklch(78% 0.012 260);
+
+  --color-white: oklch(99.4% 0.002 260);
+  --color-off: oklch(97.4% 0.004 260);
+  --color-rule: oklch(90% 0.006 260);
+  --color-ink: oklch(17% 0.015 260);
+  --color-ink-muted: oklch(44% 0.015 260);
+  --color-fill-off: oklch(84% 0.006 260);
+
+  --color-accent: oklch(81% 0.155 82);
+  --color-accent-strong: oklch(74% 0.15 74);
+  --color-accent-ink: oklch(50% 0.105 68);
+  --color-blue: oklch(62% 0.13 240);
+  --color-glow: oklch(74% 0.15 74 / 0.22);
+  --color-veil: oklch(10% 0.012 260 / 0.62);
+  --color-veil-strong: oklch(10% 0.012 260 / 0.9);
+  --color-line-on-photo: oklch(96% 0.004 260 / 0.55);
+  --color-error: oklch(78% 0.13 28);
+  --color-focus: oklch(62% 0.17 250);
+
+  --font-body: "DM Sans", "Helvetica Neue", Arial, sans-serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: clamp(1.0625rem, 0.3vw + 1rem, 1.25rem);
+  --text-xl: clamp(1.25rem, 0.6vw + 1.1rem, 1.5rem);
+  --text-2xl: clamp(1.875rem, 2.2vw + 1.2rem, 3.25rem);
+  --text-hero: clamp(2.6rem, 12vw, 5.5rem);
+  --text-stat: clamp(1.625rem, 1.5vw + 1.1rem, 2.5rem);
+  --text-statement: clamp(2.25rem, 6.2vw, 6rem);
+
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-section: clamp(4rem, 8vw, 7rem);
+  --gutter: clamp(1rem, 4vw, 4rem);
+
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-pill: 999px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 160ms;
+  --dur-med: 320ms;
+  --dur-slow: 900ms;
+}
