@@ -1,6 +1,5 @@
 import { $eventFilter, prefillEnquiry } from '@/stores/ui';
-import type { Sector } from '@/data/events';
-import type { EnquiryPath } from '@/data/content';
+import type { EnquiryPath, Sector } from '@/content/types';
 
 /**
  * Links in static sections carry their intent in data attributes. One delegated

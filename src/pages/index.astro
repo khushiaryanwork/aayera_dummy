@@ -14,24 +14,27 @@ import Services from '@/components/sections/Services.astro';
 import Faq from '@/components/sections/Faq.astro';
 import Contact from '@/components/sections/Contact.astro';
 import Footer from '@/components/sections/Footer.astro';
-import { navLinks, site } from '@/data/site';
+import { navLinks } from '@/content/site-config';
+import { getPageContent } from '@/sanity/load';
+
+const content = await getPageContent();
 ---
 
-<BaseLayout>
+<BaseLayout site={content.site} preloadImage={content.hero.reel[0]?.src}>
   <IconSprite />
-  <Header client:load links={navLinks} email={site.email} logo="/images/logo-on-dark.png" />
+  <Header client:load links={navLinks} email={content.site.email} logo="/images/logo-on-dark.png" />
   <main id="top">
-    <Hero />
-    <About />
-    <Events />
-    <Clients />
-    <Industries />
-    <Reach />
-    <Why />
-    <Participate />
-    <Services />
-    <Faq />
-    <Contact />
+    <Hero hero={content.hero} />
+    <About about={content.about} />
+    <Events events={content.events} />
+    <Clients clients={content.clients} />
+    <Industries industries={content.industries} events={content.events.items} />
+    <Reach reach={content.reach} />
+    <Why why={content.why} />
+    <Participate participate={content.participate} />
+    <Services services={content.services} />
+    <Faq faq={content.faq} />
+    <Contact contact={content.contact} site={content.site} />
   </main>
-  <Footer />
+  <Footer site={content.site} ticker={content.ticker} />
 </BaseLayout>

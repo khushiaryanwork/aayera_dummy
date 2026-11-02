@@ -1,16 +1,23 @@
 ---
-import { clientRows } from '@/data/clients';
+import { splitIntoRows } from '@/content/format';
+import type { PageContent } from '@/content/types';
+
+interface Props {
+  clients: PageContent['clients'];
+}
+const { clients } = Astro.props;
+const rows = splitIntoRows(clients.logos);
 ---
 
 <section class="section light clients" id="clients">
   <div class="wrap head" data-r>
     <div>
-      <div class="eyebrow">Our clients</div>
-      <h2>Good company. Great connections.</h2>
+      <div class="eyebrow">{clients.heading.eyebrow}</div>
+      <h2>{clients.heading.heading}</h2>
     </div>
-    <p class="lede">Connecting with organisations across industries and around the world.</p>
+    {clients.heading.intro && <p class="lede">{clients.heading.intro}</p>}
   </div>
-  {clientRows.map((row) => (
+  {rows.map((row) => (
     <div class:list={['marquee', { rev: row.reverse }]} style={`--t:${row.duration}`}>
       <ul class="m-group">
         {row.clients.map((c) => (

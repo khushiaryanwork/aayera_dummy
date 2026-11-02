@@ -2,14 +2,28 @@
 import Arrow from '@/components/ui/Arrow.astro';
 import HeroNetwork from '@/components/islands/HeroNetwork';
 import Crossfade from '@/components/islands/Crossfade';
-import { heroRingLogos } from '@/data/clients';
-import { reelSlides, stats } from '@/data/content';
+import type { PageContent } from '@/content/types';
+
+interface Props {
+  hero: PageContent['hero'];
+}
+const { hero } = Astro.props;
+
+// Headline: every word animates in turn; the highlight word is gold; the last line gets the gradient + underline.
+const lines = hero.headlineLines;
+const leadLines = lines.slice(0, -1).map((line) => line.split(/\s+/).filter(Boolean));
+const lastLine = lines.at(-1) ?? '';
+const wordCount = leadLines.flat().length;
+const plainHeadline = lines.join(' ');
+const isHighlight = (w: string) => !!hero.highlightWord && w.replace(/[^\p{L}\p{N}'’]/gu, '') === hero.highlightWord;
 
 const chips = [
-  { angle: 35, label: 'Energy', path: 'M13 2 5 14h6l-1 8 8-12h-6Z' },
-  { angle: 125, label: 'Mobility', path: 'm5 8 2-4h10l2 4 2 3v7H3v-7ZM3 12h18M7 18v2M17 18v2' },
-  { angle: 215, label: 'Healthcare', path: 'M9 3h6v6h6v6h-6v6H9v-6H3V9h6Z' },
+  { angle: 35, label: 'Energy', icon: 'energy' },
+  { angle: 125, label: 'Mobility', icon: 'mobility' },
+  { angle: 215, label: 'Healthcare', icon: 'health' },
+  { angle: 305, label: 'Technology', icon: 'tech' },
 ];
+let wordIndex = 0;
 ---
 
 <section class="hero dark">
@@ -17,24 +31,29 @@ const chips = [
 
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <p class="hero-tag"><i aria-hidden="true"></i>The meeting point for industry</p>
-      <h1 aria-label="The future doesn't happen alone.">
+      <p class="hero-tag"><i aria-hidden="true"></i>{hero.tagline}</p>
+      <h1 aria-label={plainHeadline}>
         <span aria-hidden="true">
-          <span class="w" style="--i:0">The</span>{' '}
-          <span class="w gold" style="--i:1">future</span><br />
-          <span class="w" style="--i:2">doesn't</span>{' '}
-          <span class="w" style="--i:3">happen</span><br />
-          <span class="w alone" style="--i:4"
-            ><span class="grad">alone.</span><svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"
+          {leadLines.map((words) => (
+            <Fragment>
+              {words.map((w, i) => (
+                <Fragment>
+                  <span class:list={['w', { gold: isHighlight(w) }]} style={`--i:${wordIndex++}`}>{w}</span>{i < words.length - 1 && ' '}
+                </Fragment>
+              ))}<br />
+            </Fragment>
+          ))}
+          <span class="w alone" style={`--i:${wordCount}`}
+            ><span class="grad">{lastLine}</span><svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"
               ><path pathLength="1" d="M4 14Q100 2 196 12"></path></svg
             ></span
           >
         </span>
       </h1>
-      <p class="hero-sub">We bring people and ideas into the same room, through conferences, summits, training and exhibitions.</p>
+      <p class="hero-sub">{hero.subheading}</p>
       <div class="hero-actions">
-        <a class="btn" href="#events">Discover our events <Arrow /></a>
-        <a class="btn btn-line" href="#about">Learn more about us</a>
+        <a class="btn" href="#events">{hero.primaryCta} <Arrow /></a>
+        <a class="btn btn-line" href="#about">{hero.secondaryCta}</a>
       </div>
     </div>
 
@@ -46,33 +65,36 @@ const chips = [
         <circle class="sweep rev" pathLength="1" cx="50" cy="50" r="43"></circle>
       </svg>
 
-      <Crossfade client:load className="core" captionClass="core-cap" slides={reelSlides} priority />
+      <Crossfade client:load className="core" captionClass="core-cap" slides={hero.reel} priority />
 
       <div class="ring-logos">
-        {heroRingLogos.map((src, i) => (
-          <div class="arm" style={`--a:${i * 60}`}><span class="disc"><img src={src} alt="" /></span></div>
+        {hero.ringLogos.map((src, i) => (
+          <div class="arm" style={`--a:${Math.round((i * 360) / hero.ringLogos.length)}`}><span class="disc"><img src={src} alt="" /></span></div>
         ))}
       </div>
 
       <div class="ring-chips">
         {chips.map((c) => (
-          <div class="arm" style={`--a:${c.angle}`}><span class="chip"><svg viewBox="0 0 24 24"><path d={c.path}></path></svg>{c.label}</span></div>
+          <div class="arm" style={`--a:${c.angle}`}>
+            <span class="chip">
+              <svg viewBox="0 0 24 24">
+                {c.icon === 'energy' && <path d="M13 2 5 14h6l-1 8 8-12h-6Z" />}
+                {c.icon === 'mobility' && <path d="m5 8 2-4h10l2 4 2 3v7H3v-7ZM3 12h18M7 18v2M17 18v2" />}
+                {c.icon === 'health' && <path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6Z" />}
+                {c.icon === 'tech' && (
+                  <Fragment><circle cx="12" cy="5" r="3" /><circle cx="5" cy="19" r="3" /><circle cx="19" cy="19" r="3" /><path d="m10 8-4 8M14 8l4 8M8 19h8" /></Fragment>
+                )}
+              </svg>{c.label}
+            </span>
+          </div>
         ))}
-        <div class="arm" style="--a:305">
-          <span class="chip"
-            ><svg viewBox="0 0 24 24"
-              ><circle cx="12" cy="5" r="3"></circle><circle cx="5" cy="19" r="3"></circle><circle cx="19" cy="19" r="3"></circle><path
-                d="m10 8-4 8M14 8l4 8M8 19h8"></path></svg
-            >Technology</span
-          >
-        </div>
       </div>
     </div>
   </div>
 
   <div class="wrap">
     <dl class="rail" id="stats">
-      {stats.map((s) => (
+      {hero.stats.map((s) => (
         <div class="stat">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             {s.icon === 'cal' && (

@@ -1,50 +1,58 @@
 ---
 import Arrow from '@/components/ui/Arrow.astro';
+import type { Img, PageContent } from '@/content/types';
 
-const steps = [
-  { href: '#services', title: 'Learn', body: 'Expand your perspective.' },
-  { href: '#events', title: 'Connect', body: 'Be part of the conversation.' },
-  { href: '#participate', title: 'Collaborate', body: 'Make your next move.' },
-];
+interface Props {
+  about: PageContent['about'];
+}
+const { about } = Astro.props;
+const [wide, small1, small2] = about.photos as (Img | undefined)[];
+const pos = (img?: Img) => (img?.position ? `object-position:${img.position}` : undefined);
 ---
 
 <section class="section light about" id="about">
   <div class="wrap">
     <div class="about-head">
-      <div class="eyebrow">Who we are</div>
-      <h2 class="fill" id="fill">Every breakthrough begins with a meeting of minds.</h2>
+      <div class="eyebrow">{about.eyebrow}</div>
+      <h2 class="fill" id="fill">{about.statement}</h2>
     </div>
 
     <div class="mosaic">
-      <figure class="m-photo m-wide par" data-r>
-        <img src="/images/photos/group.jpg" alt="Delegates and exhibitors together on the event floor" loading="lazy" style="object-position:50% 35%" />
-        <figcaption>On the exhibition floor</figcaption>
-      </figure>
+      {wide && (
+        <figure class="m-photo m-wide par" data-r>
+          <img src={wide.src} alt={wide.alt} loading="lazy" style={pos(wide)} />
+          {wide.caption && <figcaption>{wide.caption}</figcaption>}
+        </figure>
+      )}
 
       <div class="m-tile m-copy" data-r style="--d:1">
-        <p class="lede">Aayera is a global business information firm bringing people together through conferences, summits, training and exhibitions.</p>
-        <p>Our work connects industry insight with real conversations, so professionals can build knowledge, exchange perspectives and explore their next opportunity.</p>
-        <a class="btn btn-black" href="#services">See what we do <Arrow /></a>
+        <p class="lede">{about.lede}</p>
+        <p>{about.body}</p>
+        <a class="btn btn-black" href="#services">{about.ctaLabel} <Arrow /></a>
       </div>
 
       <div class="m-tile m-steps" data-r style="--d:1">
         <span class="steps-line" aria-hidden="true"></span>
-        {steps.map((s) => (
-          <a class="step" href={s.href}><i aria-hidden="true"></i><span><strong>{s.title}</strong>{s.body}</span><Arrow /></a>
+        {about.steps.map((s) => (
+          <a class="step" href={s.target}><i aria-hidden="true"></i><span><strong>{s.title}</strong>{s.body}</span><Arrow /></a>
         ))}
       </div>
 
-      <figure class="m-photo m-small par" data-r>
-        <img src="/images/photos/delegates.jpg" alt="Delegates in conversation at a conference table" loading="lazy" style="object-position:60% 50%" />
-      </figure>
+      {small1 && (
+        <figure class="m-photo m-small par" data-r>
+          <img src={small1.src} alt={small1.alt} loading="lazy" style={pos(small1)} />
+        </figure>
+      )}
 
       <div class="m-tile m-gold" data-r style="--d:1">
-        <p>People.<br />Knowledge.<br />Possibility.</p>
+        <p>{about.motto.map((line, i) => <Fragment>{i > 0 && <br />}{line}</Fragment>)}</p>
       </div>
 
-      <figure class="m-photo m-small par" data-r style="--d:2">
-        <img src="/images/photos/demo.jpg" alt="Delegates discussing a smart meter on display" loading="lazy" style="object-position:30% 50%" />
-      </figure>
+      {small2 && (
+        <figure class="m-photo m-small par" data-r style="--d:2">
+          <img src={small2.src} alt={small2.alt} loading="lazy" style={pos(small2)} />
+        </figure>
+      )}
     </div>
   </div>
 </section>

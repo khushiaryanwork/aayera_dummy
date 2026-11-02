@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { useStore } from '@nanostores/react';
 import { $enquiry } from '@/stores/ui';
-import { enquiryPaths, interests, type EnquiryPath } from '@/data/content';
+import { enquiryPaths, interests } from '@/content/site-config';
+import type { EnquiryPath } from '@/content/types';
 
 type Field = 'name' | 'email' | 'message';
 

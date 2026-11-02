@@ -5,7 +5,7 @@ interface Service {
   body: string;
   cta: string;
   interest: string;
-  photo: { src: string; alt: string };
+  photo: { src: string; alt: string; position?: string };
 }
 
 /** One panel open at a time; the photo wipes to match the open service. */
@@ -16,7 +16,7 @@ export default function ServicesAccordion({ services }: { services: Service[] })
     <div className="exp" id="exp">
       <div className="exp-photo">
         {services.map((s, i) => (
-          <img key={s.photo.src} className={i === open ? 'on' : undefined} src={s.photo.src} alt={s.photo.alt} loading="lazy" />
+          <img key={s.photo.src} className={i === open ? 'on' : undefined} src={s.photo.src} alt={s.photo.alt} loading="lazy" style={s.photo.position ? { objectPosition: s.photo.position } : undefined} />
         ))}
       </div>
       <div className="exp-list" data-r style={{ '--d': 1 } as React.CSSProperties}>

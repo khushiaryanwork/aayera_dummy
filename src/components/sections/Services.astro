@@ -1,17 +1,22 @@
 ---
 import ServicesAccordion from '@/components/islands/ServicesAccordion';
-import { services } from '@/data/content';
+import type { PageContent } from '@/content/types';
+
+interface Props {
+  services: PageContent['services'];
+}
+const { services } = Astro.props;
 ---
 
 <section class="section light" id="services">
   <div class="wrap">
     <div class="head" data-r>
       <div>
-        <div class="eyebrow">Our expertise</div>
-        <h2>Services that set things in motion.</h2>
+        <div class="eyebrow">{services.heading.eyebrow}</div>
+        <h2>{services.heading.heading}</h2>
       </div>
-      <p class="lede">Knowledge to move forward. Connections to make it happen.</p>
+      {services.heading.intro && <p class="lede">{services.heading.intro}</p>}
     </div>
-    <ServicesAccordion client:visible services={services} />
+    <ServicesAccordion client:visible services={services.items} />
   </div>
 </section>

@@ -1,28 +1,28 @@
 ---
 import '@/styles/tokens.css';
 import '@/styles/global.css';
-import { site } from '@/data/site';
+import { siteUrl } from '@/content/site-config';
+import type { PageContent } from '@/content/types';
 
 interface Props {
-  title?: string;
-  description?: string;
-  /** Keeps search engines out while the site is a preview. Set to false at launch. */
-  noindex?: boolean;
+  site: PageContent['site'];
+  /** Preloaded above-the-fold image */
+  preloadImage?: string;
 }
 
-const { title = site.title, description = site.description, noindex = true } = Astro.props;
-const ogImage = new URL(site.ogImage, Astro.site);
+const { site, preloadImage } = Astro.props;
+const ogImage = new URL(site.shareImage, Astro.site);
 
 const orgSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: site.name,
-  url: site.url,
+  name: 'Aayera',
+  url: siteUrl,
   email: site.email,
-  telephone: site.phones[0].label,
+  telephone: site.phones[0]?.label,
   address: {
     '@type': 'PostalAddress',
-    streetAddress: `${site.address.street}, ${site.address.area}`,
+    streetAddress: [site.address.street, site.address.area].filter(Boolean).join(', '),
     addressLocality: site.address.city,
     postalCode: site.address.postalCode,
     addressCountry: site.address.countryCode,
@@ -35,19 +35,19 @@ const orgSchema = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    {noindex && <meta name="robots" content="noindex" />}
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={site.url} />
-    <meta property="og:title" content={site.ogTitle} />
-    <meta property="og:description" content={site.ogDescription} />
+    {site.noindex && <meta name="robots" content="noindex" />}
+    <title>{site.title}</title>
+    <meta name="description" content={site.description} />
+    <link rel="canonical" href={siteUrl} />
+    <meta property="og:title" content={site.shareTitle} />
+    <meta property="og:description" content={site.shareDescription} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:type" content="website" />
     <link rel="icon" href="/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..700&display=swap" />
-    <link rel="preload" as="image" href="/images/photos/stage.jpg" />
+    {preloadImage && <link rel="preload" as="image" href={preloadImage} />}
     <script is:inline>document.documentElement.classList.add('js');</script>
     <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
   </head>

@@ -1,8 +1,15 @@
 ---
 import EventsCarousel from '@/components/islands/EventsCarousel';
-import { events } from '@/data/events';
+import { formatDateRange } from '@/content/format';
+import type { PageContent } from '@/content/types';
+
+interface Props {
+  events: PageContent['events'];
+}
+const { events } = Astro.props;
+const items = events.items.map((e) => ({ ...e, dates: formatDateRange(e.startDate, e.endDate) }));
 ---
 
 <section class="section dark events" id="events">
-  <EventsCarousel client:visible events={events} />
+  <EventsCarousel client:visible heading={events.heading} events={items} />
 </section>

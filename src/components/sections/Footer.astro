@@ -1,5 +1,12 @@
 ---
-import { site } from '@/data/site';
+import type { PageContent } from '@/content/types';
+
+interface Props {
+  site: PageContent['site'];
+  ticker: string[];
+}
+const { site, ticker } = Astro.props;
+const { address } = site;
 
 const explore = [
   { href: '#about', label: 'About' },
@@ -12,7 +19,7 @@ const year = new Date().getFullYear();
 
 <div class="ticker" aria-hidden="true">
   <div class="t-group">
-    {['Conferences', 'Summits', 'Training', 'Webinars', 'Exhibitions', 'Networking'].map((t) => <Fragment><span>{t}</span><i></i></Fragment>)}
+    {ticker.map((t) => <Fragment><span>{t}</span><i></i></Fragment>)}
   </div>
 </div>
 
@@ -21,7 +28,7 @@ const year = new Date().getFullYear();
     <div class="foot-grid">
       <div class="foot-brand">
         <img src="/images/logo-on-dark.png" alt="Aayera, Connecting Aces" width="164" height="82" loading="lazy" />
-        <p>Connecting people, knowledge and business possibilities.</p>
+        <p>{site.footerTagline}</p>
       </div>
       <div>
         <h2>Explore</h2>
@@ -36,7 +43,7 @@ const year = new Date().getFullYear();
       </div>
       <div>
         <h2>Visit</h2>
-        <address>{site.address.street}<br />{site.address.area}, {site.address.city} {site.address.postalCode}<br />{site.address.country}</address>
+        <address>{address.street}<br />{address.area}, {address.city} {address.postalCode}<br />{address.country}</address>
       </div>
     </div>
     <p class="foot-base">© {year} Aayera. All rights reserved.</p>

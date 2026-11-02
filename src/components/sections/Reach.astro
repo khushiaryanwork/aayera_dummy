@@ -1,15 +1,22 @@
 ---
-import { regions } from '@/data/content';
+import type { PageContent } from '@/content/types';
+
+interface Props {
+  reach: PageContent['reach'];
+}
+const { reach } = Astro.props;
+const { heading } = reach;
 ---
 
 <section class="section light" id="reach">
   <div class="wrap">
     <div class="reach-top">
       <div data-r>
-        <div class="eyebrow">Global presence</div>
-        <h2>Across borders. Around the same table.</h2>
-        <p class="lede" style="margin-top:var(--space-md)">We combine international perspective with local understanding, bringing businesses, experts and decision-makers into the same conversation.</p>
+        <div class="eyebrow">{heading.eyebrow}</div>
+        <h2>{heading.heading}</h2>
+        {heading.intro && <p class="lede" style="margin-top:var(--space-md)">{heading.intro}</p>}
       </div>
+      <!-- The map is fixed artwork; update the pins here if host cities change -->
       <div class="map" id="map" data-r style="--d:1">
         <img src="/images/world-dots.svg" alt="" width="1120" height="420" loading="lazy">
         <svg viewBox="0 0 1120 420" role="img" aria-label="World map linking Bengaluru with Aayera's other host cities and countries of presence, listed below">
@@ -49,7 +56,7 @@ import { regions } from '@/data/content';
     </div>
 
     <div class="regions" data-r>
-      {regions.map((r) => (
+      {reach.regions.map((r) => (
         <div class="region">
           <div class="region-top"><h3>{r.name}</h3><span>{r.badge}</span></div>
           <ul>{r.places.map((p) => <li>{p}</li>)}</ul>
@@ -59,9 +66,7 @@ import { regions } from '@/data/content';
       <div class="region region-dark">
         <div class="eyebrow">Reach</div>
         <dl>
-          <div><dt>Countries of presence</dt><dd>6</dd></div>
-          <div><dt>Host cities</dt><dd>5</dd></div>
-          <div><dt>Client organisations</dt><dd>25</dd></div>
+          {reach.totals.map((t) => <div><dt>{t.label}</dt><dd>{t.value}</dd></div>)}
         </dl>
       </div>
     </div>

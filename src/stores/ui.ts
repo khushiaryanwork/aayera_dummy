@@ -1,6 +1,5 @@
 import { atom } from 'nanostores';
-import type { Sector } from '@/data/events';
-import type { EnquiryPath } from '@/data/content';
+import type { EnquiryPath, Sector } from '@/content/types';
 
 /**
  * Shared state between islands. Static Astro sections write to these through

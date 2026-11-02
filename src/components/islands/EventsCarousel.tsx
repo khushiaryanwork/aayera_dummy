@@ -1,12 +1,19 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useStore } from '@nanostores/react';
 import { $eventFilter, prefersReducedMotion } from '@/stores/ui';
-import { sectorLabels, type EventItem, type Sector } from '@/data/events';
+import { sectorLabels } from '@/content/site-config';
+import type { EventItem, Heading, Sector } from '@/content/types';
 
 const filters: (Sector | 'all')[] = ['all', 'energy', 'mobility', 'health', 'tech'];
 const Arrow = () => <svg aria-hidden="true"><use href="#arrow" /></svg>;
 
-export default function EventsCarousel({ events }: { events: EventItem[] }) {
+interface Props {
+  heading: Heading;
+  /** Events with their date range already formatted */
+  events: (EventItem & { dates: string })[];
+}
+
+export default function EventsCarousel({ heading, events }: Props) {
   // Hydrate with the server markup ("all"), then apply any filter chosen before this island loaded
   const stored = useStore($eventFilter);
   const [mounted, setMounted] = useState(false);
@@ -49,8 +56,11 @@ export default function EventsCarousel({ events }: { events: EventItem[] }) {
     <div className="wrap events-grid">
       <div className="events-side" data-r>
         <div>
-          <div className="eyebrow">Our event record</div>
-          <h2>The rooms where ideas <span className="grad">met opportunity</span></h2>
+          {heading.eyebrow && <div className="eyebrow">{heading.eyebrow}</div>}
+          <h2>
+            {heading.heading}
+            {heading.highlight && <> <span className="grad">{heading.highlight}</span></>}
+          </h2>
         </div>
         <div className="filters" role="group" aria-label="Filter events by sector">
           {filters.map((f) => (
@@ -68,9 +78,9 @@ export default function EventsCarousel({ events }: { events: EventItem[] }) {
 
       <ul className="track" ref={track} tabIndex={0} aria-label="Past events" data-r style={{ '--d': 1 } as React.CSSProperties} onScroll={update}>
         {events.map((e) => (
-          <li key={e.topic} className="card" data-sector={e.sector} hidden={filter !== 'all' && e.sector !== filter}>
+          <li key={e.title + e.startDate} className="card" data-sector={e.sector} hidden={filter !== 'all' && e.sector !== filter}>
             <div className="card-art" style={{ '--art': `url(${e.image.src})` } as React.CSSProperties}>
-              <img src={e.image.src} alt={e.image.alt} width={e.image.width} height={e.image.height} loading="lazy" />
+              <img src={e.image.src} alt={e.image.alt} width={e.image.width} height={e.image.height} loading="lazy" style={e.image.position ? { objectPosition: e.image.position } : undefined} />
             </div>
             <div className="card-body">
               <span className="card-tag">{sectorLabels[e.sector]}</span>
@@ -79,7 +89,7 @@ export default function EventsCarousel({ events }: { events: EventItem[] }) {
                 <li><svg aria-hidden="true"><use href="#cal" /></svg>{e.dates}</li>
                 <li><svg aria-hidden="true"><use href="#pin" /></svg>{e.location}</li>
               </ul>
-              <a className="arrow-link card-foot" href="#contact" data-topic={e.topic}>
+              <a className="arrow-link card-foot" href="#contact" data-topic={e.title}>
                 Ask about related events <Arrow />
               </a>
             </div>

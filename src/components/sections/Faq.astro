@@ -1,18 +1,24 @@
 ---
-import { faqs } from '@/data/content';
+import { linkifyEmails } from '@/content/format';
+import type { PageContent } from '@/content/types';
+
+interface Props {
+  faq: PageContent['faq'];
+}
+const { faq } = Astro.props;
 ---
 
 <section class="section light" id="faq" style="padding-top:0">
   <div class="wrap faq">
     <div data-r>
-      <div class="eyebrow">Questions</div>
-      <h2>Before we connect.</h2>
+      <div class="eyebrow">{faq.heading.eyebrow}</div>
+      <h2>{faq.heading.heading}</h2>
     </div>
     <div class="faq-list" data-r style="--d:1">
-      {faqs.map((f) => (
+      {faq.items.map((f) => (
         <details>
-          <summary>{f.q}<span class="plus" aria-hidden="true"></span></summary>
-          <p set:html={f.a} />
+          <summary>{f.question}<span class="plus" aria-hidden="true"></span></summary>
+          <p set:html={linkifyEmails(f.answer)} />
         </details>
       ))}
     </div>

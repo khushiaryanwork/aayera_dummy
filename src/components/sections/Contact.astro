@@ -1,20 +1,28 @@
 ---
 import EnquiryForm from '@/components/islands/EnquiryForm';
-import { site } from '@/data/site';
+import type { PageContent } from '@/content/types';
+
+interface Props {
+  contact: PageContent['contact'];
+  site: PageContent['site'];
+}
+const { contact, site } = Astro.props;
+const { heading } = contact;
+const { address } = site;
 ---
 
 <section class="section dark contact" id="contact">
   <div class="wrap contact-grid">
     <div class="contact-intro" data-r>
       <div>
-        <div class="eyebrow">It starts with a conversation</div>
-        <h2>Let's make hello <span class="grad">mean something.</span></h2>
+        <div class="eyebrow">{heading.eyebrow}</div>
+        <h2>{heading.heading}{heading.highlight && <Fragment> <span class="grad">{heading.highlight}</span></Fragment>}</h2>
       </div>
-      <p class="lede">Planning an event, developing your team, or looking for your next industry connection? We'd love to hear from you.</p>
+      {heading.intro && <p class="lede">{heading.intro}</p>}
       <div class="direct">
         <a href={`mailto:${site.email}`}>{site.email}</a>
         {site.phones.map((p) => <a href={p.href}>{p.label}</a>)}
-        <address>{site.address.street}, {site.address.area}<br />{site.address.city} {site.address.postalCode}, {site.address.country}</address>
+        <address>{[address.street, address.area].filter(Boolean).join(', ')}<br />{address.city} {address.postalCode}, {address.country}</address>
       </div>
     </div>
 
