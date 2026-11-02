@@ -1,0 +1,69 @@
+---
+import { regions } from '@/data/content';
+---
+
+<section class="section light" id="reach">
+  <div class="wrap">
+    <div class="reach-top">
+      <div data-r>
+        <div class="eyebrow">Global presence</div>
+        <h2>Across borders. Around the same table.</h2>
+        <p class="lede" style="margin-top:var(--space-md)">We combine international perspective with local understanding, bringing businesses, experts and decision-makers into the same conversation.</p>
+      </div>
+      <div class="map" id="map" data-r style="--d:1">
+        <img src="/images/world-dots.svg" alt="" width="1120" height="420" loading="lazy">
+        <svg viewBox="0 0 1120 420" role="img" aria-label="World map linking Bengaluru with Aayera's other host cities and countries of presence, listed below">
+          <path class="arc" style="--i:0" pathLength="1" d="M830 208Q810 200 815 186"/>
+          <path class="arc" style="--i:1" pathLength="1" d="M830 208Q790 165 741 159"/>
+          <path class="arc" style="--i:2" pathLength="1" d="M830 208Q780 150 726 159"/>
+          <path class="arc" style="--i:3" pathLength="1" d="M830 208Q770 135 707 161"/>
+          <path class="arc" style="--i:4" pathLength="1" d="M830 208Q750 80 651 100"/>
+          <path class="arc" style="--i:5" pathLength="1" d="M830 208Q770 320 632 365"/>
+          <path class="arc" style="--i:6" pathLength="1" d="M830 208Q720 380 594 396"/>
+          <path class="arc" style="--i:7" pathLength="1" d="M830 208Q680 0 520 55"/>
+          <path class="arc" style="--i:8" pathLength="1" d="M830 208Q530 -70 224 97"/>
+          <path class="pulse" style="--i:1" pathLength="1" d="M830 208Q790 165 741 159"/>
+          <path class="pulse" style="--i:2" pathLength="1" d="M830 208Q780 150 726 159"/>
+          <path class="pulse" style="--i:3" pathLength="1" d="M830 208Q770 135 707 161"/>
+          <path class="pulse" style="--i:4" pathLength="1" d="M830 208Q750 80 651 100"/>
+          <path class="pulse" style="--i:5" pathLength="1" d="M830 208Q770 320 632 365"/>
+          <path class="pulse" style="--i:6" pathLength="1" d="M830 208Q720 380 594 396"/>
+          <path class="pulse" style="--i:7" pathLength="1" d="M830 208Q680 0 520 55"/>
+          <path class="pulse" style="--i:8" pathLength="1" d="M830 208Q530 -70 224 97"/>
+          <circle class="halo" style="--i:0" cx="830" cy="208" r="20"/>
+          <circle class="halo" style="--i:2" cx="651" cy="100" r="16"/>
+          <circle class="halo" style="--i:3" cx="632" cy="365" r="16"/>
+          <circle class="halo" style="--i:4" cx="594" cy="396" r="16"/>
+          <circle class="pin-o" cx="520" cy="55" r="7"/>
+          <circle class="pin-o" cx="224" cy="97" r="7"/>
+          <circle class="pin-o" cx="707" cy="161" r="7"/>
+          <circle class="pin-o" cx="726" cy="159" r="7"/>
+          <circle class="pin-o" cx="741" cy="159" r="7"/>
+          <circle class="pin" cx="651" cy="100" r="8"/><text x="600" y="88">Ankara</text>
+          <circle class="pin" cx="815" cy="186" r="8"/><text x="828" y="182">Pune</text>
+          <circle class="pin" cx="830" cy="208" r="9"/><text x="845" y="215">Bengaluru</text>
+          <circle class="pin" cx="632" cy="365" r="8"/><text x="646" y="372">Johannesburg</text>
+          <circle class="pin" cx="594" cy="396" r="8"/><text x="492" y="403">Cape Town</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="regions" data-r>
+      {regions.map((r) => (
+        <div class="region">
+          <div class="region-top"><h3>{r.name}</h3><span>{r.badge}</span></div>
+          <ul>{r.places.map((p) => <li>{p}</li>)}</ul>
+          <p>{r.body}</p>
+        </div>
+      ))}
+      <div class="region region-dark">
+        <div class="eyebrow">Reach</div>
+        <dl>
+          <div><dt>Countries of presence</dt><dd>6</dd></div>
+          <div><dt>Host cities</dt><dd>5</dd></div>
+          <div><dt>Client organisations</dt><dd>25</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>

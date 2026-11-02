@@ -1,0 +1,37 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import IconSprite from '@/components/ui/IconSprite.astro';
+import Header from '@/components/islands/Header';
+import Hero from '@/components/sections/Hero.astro';
+import About from '@/components/sections/About.astro';
+import Events from '@/components/sections/Events.astro';
+import Clients from '@/components/sections/Clients.astro';
+import Industries from '@/components/sections/Industries.astro';
+import Reach from '@/components/sections/Reach.astro';
+import Why from '@/components/sections/Why.astro';
+import Participate from '@/components/sections/Participate.astro';
+import Services from '@/components/sections/Services.astro';
+import Faq from '@/components/sections/Faq.astro';
+import Contact from '@/components/sections/Contact.astro';
+import Footer from '@/components/sections/Footer.astro';
+import { navLinks, site } from '@/data/site';
+---
+
+<BaseLayout>
+  <IconSprite />
+  <Header client:load links={navLinks} email={site.email} logo="/images/logo-on-dark.png" />
+  <main id="top">
+    <Hero />
+    <About />
+    <Events />
+    <Clients />
+    <Industries />
+    <Reach />
+    <Why />
+    <Participate />
+    <Services />
+    <Faq />
+    <Contact />
+  </main>
+  <Footer />
+</BaseLayout>

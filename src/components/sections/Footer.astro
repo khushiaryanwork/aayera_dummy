@@ -1,0 +1,46 @@
+---
+import { site } from '@/data/site';
+
+const explore = [
+  { href: '#about', label: 'About' },
+  { href: '#events', label: 'Events' },
+  { href: '#services', label: 'Services' },
+  { href: '#clients', label: 'Clients' },
+];
+const year = new Date().getFullYear();
+---
+
+<div class="ticker" aria-hidden="true">
+  <div class="t-group">
+    {['Conferences', 'Summits', 'Training', 'Webinars', 'Exhibitions', 'Networking'].map((t) => <Fragment><span>{t}</span><i></i></Fragment>)}
+  </div>
+</div>
+
+<footer class="dark">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="/images/logo-on-dark.png" alt="Aayera, Connecting Aces" width="164" height="82" loading="lazy" />
+        <p>Connecting people, knowledge and business possibilities.</p>
+      </div>
+      <div>
+        <h2>Explore</h2>
+        <ul>{explore.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+      </div>
+      <div>
+        <h2>Talk to us</h2>
+        <ul>
+          <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+          {site.phones.map((p) => <li><a href={p.href}>{p.label}</a></li>)}
+        </ul>
+      </div>
+      <div>
+        <h2>Visit</h2>
+        <address>{site.address.street}<br />{site.address.area}, {site.address.city} {site.address.postalCode}<br />{site.address.country}</address>
+      </div>
+    </div>
+    <p class="foot-base">© {year} Aayera. All rights reserved.</p>
+  </div>
+</footer>
+
+<a class="btn float-talk" id="float-talk" href="#contact">Talk to us</a>

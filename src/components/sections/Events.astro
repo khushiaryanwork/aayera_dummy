@@ -1,0 +1,8 @@
+---
+import EventsCarousel from '@/components/islands/EventsCarousel';
+import { events } from '@/data/events';
+---
+
+<section class="section dark events" id="events">
+  <EventsCarousel client:visible events={events} />
+</section>

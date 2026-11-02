@@ -1,0 +1,23 @@
+---
+import EnquiryForm from '@/components/islands/EnquiryForm';
+import { site } from '@/data/site';
+---
+
+<section class="section dark contact" id="contact">
+  <div class="wrap contact-grid">
+    <div class="contact-intro" data-r>
+      <div>
+        <div class="eyebrow">It starts with a conversation</div>
+        <h2>Let's make hello <span class="grad">mean something.</span></h2>
+      </div>
+      <p class="lede">Planning an event, developing your team, or looking for your next industry connection? We'd love to hear from you.</p>
+      <div class="direct">
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+        {site.phones.map((p) => <a href={p.href}>{p.label}</a>)}
+        <address>{site.address.street}, {site.address.area}<br />{site.address.city} {site.address.postalCode}, {site.address.country}</address>
+      </div>
+    </div>
+
+    <EnquiryForm client:load email={site.email} />
+  </div>
+</section>

@@ -1,0 +1,42 @@
+---
+import Crossfade from '@/components/islands/Crossfade';
+import { whyPhotos } from '@/data/content';
+---
+
+<section class="section dark why" id="why">
+  <div class="wrap why-grid">
+    <div class="why-card" data-r>
+      <div>
+        <div class="eyebrow">A few words about us</div>
+        <h2>Why work with Aayera?</h2>
+      </div>
+      <Crossfade client:visible className="why-photo" slides={whyPhotos} />
+    </div>
+    <div class="reasons">
+      <div class="reason" data-r>
+        <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="14" r="7"></circle><circle cx="10" cy="34" r="5"></circle><circle cx="38" cy="34" r="5"></circle><path d="M19 20l-6 10M29 20l6 10M15 34h18"></path></svg>
+        <h3>The right minds</h3>
+        <p>We bring businesses, experts and decision-makers together, so the people you need are in the room.</p>
+        <a class="btn btn-line" href="#events">View events <svg aria-hidden="true"><use href="#arrow"></use></svg></a>
+      </div>
+      <div class="reason" data-r style="--d:1">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 10h28v20H18l-8 8v-8H6Z"></path><path d="M38 18h4v18h-4v6l-6-6H22"></path></svg>
+        <h3>Relevant conversations</h3>
+        <p>Each programme is built around a specific industry and the challenges that matter to it.</p>
+        <a class="btn btn-line" href="#industries">View industries <svg aria-hidden="true"><use href="#arrow"></use></svg></a>
+      </div>
+      <div class="reason" data-r>
+        <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="18"></circle><ellipse cx="24" cy="24" rx="8" ry="18"></ellipse><path d="M6 24h36M9 14h30M9 34h30"></path></svg>
+        <h3>Global outlook, local understanding</h3>
+        <p>An on-the-ground presence across six countries, with events from Bengaluru to Cape Town.</p>
+        <a class="btn btn-line" href="#reach">View our reach <svg aria-hidden="true"><use href="#arrow"></use></svg></a>
+      </div>
+      <div class="reason" data-r style="--d:1">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="8" width="28" height="34" rx="3"></rect><path d="M18 8V4h12v4M17 20h14M17 28h14M17 36h8"></path></svg>
+        <h3>Delivered end to end</h3>
+        <p>Venue and accommodation, speakers, registration, sponsors and exhibitions, all in one team.</p>
+        <a class="btn btn-line" href="#contact">Discuss your brief <svg aria-hidden="true"><use href="#arrow"></use></svg></a>
+      </div>
+    </div>
+  </div>
+</section>

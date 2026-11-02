@@ -1,0 +1,62 @@
+---
+import '@/styles/tokens.css';
+import '@/styles/global.css';
+import { site } from '@/data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Keeps search engines out while the site is a preview. Set to false at launch. */
+  noindex?: boolean;
+}
+
+const { title = site.title, description = site.description, noindex = true } = Astro.props;
+const ogImage = new URL(site.ogImage, Astro.site);
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: site.name,
+  url: site.url,
+  email: site.email,
+  telephone: site.phones[0].label,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: `${site.address.street}, ${site.address.area}`,
+    addressLocality: site.address.city,
+    postalCode: site.address.postalCode,
+    addressCountry: site.address.countryCode,
+  },
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {noindex && <meta name="robots" content="noindex" />}
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={site.url} />
+    <meta property="og:title" content={site.ogTitle} />
+    <meta property="og:description" content={site.ogDescription} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..700&display=swap" />
+    <link rel="preload" as="image" href="/images/photos/stage.jpg" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+  </head>
+  <body>
+    <slot />
+    <script>
+      import '@/scripts/intents';
+      import '@/scripts/scroll-effects';
+      import '@/scripts/marquee';
+    </script>
+  </body>
+</html>

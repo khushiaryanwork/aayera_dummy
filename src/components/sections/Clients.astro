@@ -1,0 +1,22 @@
+---
+import { clientRows } from '@/data/clients';
+---
+
+<section class="section light clients" id="clients">
+  <div class="wrap head" data-r>
+    <div>
+      <div class="eyebrow">Our clients</div>
+      <h2>Good company. Great connections.</h2>
+    </div>
+    <p class="lede">Connecting with organisations across industries and around the world.</p>
+  </div>
+  {clientRows.map((row) => (
+    <div class:list={['marquee', { rev: row.reverse }]} style={`--t:${row.duration}`}>
+      <ul class="m-group">
+        {row.clients.map((c) => (
+          <li><img src={c.logo} alt={c.name} width="230" height="120" /></li>
+        ))}
+      </ul>
+    </div>
+  ))}
+</section>

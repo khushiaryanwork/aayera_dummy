@@ -1,0 +1,17 @@
+---
+import ServicesAccordion from '@/components/islands/ServicesAccordion';
+import { services } from '@/data/content';
+---
+
+<section class="section light" id="services">
+  <div class="wrap">
+    <div class="head" data-r>
+      <div>
+        <div class="eyebrow">Our expertise</div>
+        <h2>Services that set things in motion.</h2>
+      </div>
+      <p class="lede">Knowledge to move forward. Connections to make it happen.</p>
+    </div>
+    <ServicesAccordion client:visible services={services} />
+  </div>
+</section>
