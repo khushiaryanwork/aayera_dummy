@@ -1,4 +1,5 @@
 import type { PageContent } from './types';
+import { asset } from './paths';
 
 /**
  * The site's original content. Used for any field that is empty in Sanity,
@@ -6,8 +7,8 @@ import type { PageContent } from './types';
  * `npm run seed` imports exactly this into an empty dataset.
  */
 
-const photo = (name: string) => `/images/photos/${name}.jpg`;
-const logo = (n: number) => `/images/clients/${n}.png`;
+const photo = (name: string) => asset(`/images/photos/${name}.jpg`);
+const logo = (n: number) => asset(`/images/clients/${n}.png`);
 
 export const fallback: PageContent = {
   site: {
@@ -73,31 +74,31 @@ export const fallback: PageContent = {
     items: [
       {
         title: 'EV Charging Summit', sector: 'mobility', startDate: '2021-06-21', endDate: '2021-06-22', location: 'Bengaluru, India',
-        image: { src: '/images/events/ev-charging-2021.jpg', alt: 'EV Charging Summit 2021 event artwork', width: 1280, height: 648 },
+        image: { src: asset('/images/events/ev-charging-2021.jpg'), alt: 'EV Charging Summit 2021 event artwork', width: 1280, height: 648 },
       },
       {
         title: 'Smart Meter Summit', sector: 'energy', startDate: '2021-06-07', endDate: '2021-06-08', location: 'Bengaluru, India',
-        image: { src: '/images/events/smart-meter-2021.jpg', alt: 'Smart Meter Summit 2021 event artwork', width: 1080, height: 600 },
+        image: { src: asset('/images/events/smart-meter-2021.jpg'), alt: 'Smart Meter Summit 2021 event artwork', width: 1080, height: 600 },
       },
       {
         title: 'Turkey Healthcare Project Delivery Conference', sector: 'health', startDate: '2020-04-08', endDate: '2020-04-09', location: 'Ankara, Turkey',
-        image: { src: '/images/events/turkey-healthcare-2020.jpg', alt: 'Turkey Healthcare Project Delivery Conference 2020 event artwork', width: 551, height: 321 },
+        image: { src: asset('/images/events/turkey-healthcare-2020.jpg'), alt: 'Turkey Healthcare Project Delivery Conference 2020 event artwork', width: 551, height: 321 },
       },
       {
         title: 'Africa Healthcare Manufacturers and Distributors Summit', sector: 'health', startDate: '2020-03-24', endDate: '2020-03-25', location: 'Cape Town, South Africa',
-        image: { src: '/images/events/africa-manufacturers-2020.jpg', alt: 'Africa Healthcare Manufacturers and Distributors Summit 2020 event artwork', width: 551, height: 321 },
+        image: { src: asset('/images/events/africa-manufacturers-2020.jpg'), alt: 'Africa Healthcare Manufacturers and Distributors Summit 2020 event artwork', width: 551, height: 321 },
       },
       {
         title: 'Africa Healthcare Development & Project Delivery Conference', sector: 'health', startDate: '2019-09-11', endDate: '2019-09-12', location: 'Johannesburg, South Africa',
-        image: { src: '/images/events/africa-development-2019.jpg', alt: 'Africa Healthcare Development and Project Delivery Conference 2019 event artwork', width: 551, height: 321 },
+        image: { src: asset('/images/events/africa-development-2019.jpg'), alt: 'Africa Healthcare Development and Project Delivery Conference 2019 event artwork', width: 551, height: 321 },
       },
       {
         title: 'Hybrid & Electric Vehicle Confex', sector: 'mobility', startDate: '2018-08-09', endDate: '2018-08-10', location: 'Pune, India',
-        image: { src: '/images/events/hybrid-ev-2018.png', alt: 'Hybrid and Electric Vehicle Confex 2018 event artwork', width: 551, height: 321 },
+        image: { src: asset('/images/events/hybrid-ev-2018.png'), alt: 'Hybrid and Electric Vehicle Confex 2018 event artwork', width: 551, height: 321 },
       },
       {
         title: 'IoT India Confex', sector: 'tech', startDate: '2017-08-24', endDate: '2017-08-25', location: 'Le Méridien, Bengaluru, India',
-        image: { src: '/images/events/iot-india-2017.jpg', alt: 'IoT India Confex 2017 event artwork', width: 1280, height: 466 },
+        image: { src: asset('/images/events/iot-india-2017.jpg'), alt: 'IoT India Confex 2017 event artwork', width: 1280, height: 466 },
       },
     ],
   },

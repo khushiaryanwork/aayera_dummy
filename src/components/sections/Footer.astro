@@ -1,5 +1,6 @@
 ---
 import type { PageContent } from '@/content/types';
+import { asset } from '@/content/paths';
 
 interface Props {
   site: PageContent['site'];
@@ -27,7 +28,7 @@ const year = new Date().getFullYear();
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
-        <img src="/images/logo-on-dark.png" alt="Aayera, Connecting Aces" width="164" height="82" loading="lazy" />
+        <img src={asset('/images/logo-on-dark.png')} alt="Aayera, Connecting Aces" width="164" height="82" loading="lazy" />
         <p>{site.footerTagline}</p>
       </div>
       <div>

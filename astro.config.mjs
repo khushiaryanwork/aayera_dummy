@@ -10,8 +10,10 @@ const projectId = env.PUBLIC_SANITY_PROJECT_ID || 'jmz64r1s';
 const dataset = env.PUBLIC_SANITY_DATASET || 'production';
 
 // https://docs.astro.build/en/reference/configuration-reference/
+// SITE and BASE_PATH let the same code deploy to a subfolder, e.g. GitHub Pages (see .github/workflows).
 export default defineConfig({
-  site: 'https://www.aayera.com',
+  site: process.env.SITE || 'https://www.aayera.com',
+  base: process.env.BASE_PATH || '/',
   integrations: [
     sanity({
       projectId,

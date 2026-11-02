@@ -16,13 +16,14 @@ import Contact from '@/components/sections/Contact.astro';
 import Footer from '@/components/sections/Footer.astro';
 import { navLinks } from '@/content/site-config';
 import { getPageContent } from '@/sanity/load';
+import { asset } from '@/content/paths';
 
 const content = await getPageContent();
 ---
 
 <BaseLayout site={content.site} preloadImage={content.hero.reel[0]?.src}>
   <IconSprite />
-  <Header client:load links={navLinks} email={content.site.email} logo="/images/logo-on-dark.png" />
+  <Header client:load links={navLinks} email={content.site.email} logo={asset('/images/logo-on-dark.png')} />
   <main id="top">
     <Hero hero={content.hero} />
     <About about={content.about} />

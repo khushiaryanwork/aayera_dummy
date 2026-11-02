@@ -1,5 +1,6 @@
 ---
 import type { PageContent } from '@/content/types';
+import { asset } from '@/content/paths';
 
 interface Props {
   reach: PageContent['reach'];
@@ -18,7 +19,7 @@ const { heading } = reach;
       </div>
       <!-- The map is fixed artwork; update the pins here if host cities change -->
       <div class="map" id="map" data-r style="--d:1">
-        <img src="/images/world-dots.svg" alt="" width="1120" height="420" loading="lazy">
+        <img src={asset('/images/world-dots.svg')} alt="" width="1120" height="420" loading="lazy">
         <svg viewBox="0 0 1120 420" role="img" aria-label="World map linking Bengaluru with Aayera's other host cities and countries of presence, listed below">
           <path class="arc" style="--i:0" pathLength="1" d="M830 208Q810 200 815 186"/>
           <path class="arc" style="--i:1" pathLength="1" d="M830 208Q790 165 741 159"/>
